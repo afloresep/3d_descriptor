@@ -16,10 +16,10 @@ jobs:
           pip install -r requirements.txt
           pip install pytest flake8 black mypy
       - name: Lint
-        run: flake8 my_3d_descriptors
+        run: flake8 3D_descriptors
       - name: Type Check
-        run: mypy my_3d_descriptors
+        run: mypy 3D_descriptors
       - name: Test
-        run: pytest --cov=my_3d_descriptors
+        run: pytest --cov=3D_descriptors
       - name: Coverage Report
         run: echo "Coverage done!"
