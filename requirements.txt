@@ -1,0 +1,12 @@
+# Runtime dependencies
+rdkit
+numpy
+pandas
+matplotlib
+
+# Testing and linting tools
+pytest
+flake8
+black
+mypy
+pytest-cov
