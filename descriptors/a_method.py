@@ -1,7 +1,7 @@
 # my_3d_descriptors/descriptors/approach_a.py
 
 from .base_descriptor import Base3DDescriptor
-from ..utils.chem_utils import compute_MC2, compute_fraction_sp3, compute_fraction_carbon
+from ..utils.chem_utils import _compute_MC2, _compute_fraction_sp3, _compute_fraction_carbon
 
 class ApproachA(Base3DDescriptor):
     """ This is the first approach for the 3D descriptor. 
@@ -15,7 +15,7 @@ class ApproachA(Base3DDescriptor):
         Base3DDescriptor (_type_): _description_
     """
 
-    def compute(self, mol):
+    def compute(self, mol) -> tuple[float, float, float]:
         """_summary_
 
         Args:
@@ -24,8 +24,8 @@ class ApproachA(Base3DDescriptor):
         Returns:
             _type_: _description_
         """
-        x = compute_MC2(mol)          # returns float
-        y = compute_fraction_sp3(mol) # returns float
-        z = compute_fraction_carbon(mol)  # returns float
+        x = _compute_MC2(mol)          # returns float
+        y = _compute_fraction_sp3(mol) # returns float
+        z = _compute_fraction_carbon(mol)  # returns float
 
         return (x, y, z)
