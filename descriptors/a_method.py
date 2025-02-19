@@ -1,7 +1,7 @@
 # my_3d_descriptors/descriptors/approach_a.py
 
 from .base_descriptor import Base3DDescriptor
-from ..utils.chem_utils import _compute_MC2, _compute_fraction_sp3, _compute_fraction_carbon
+from utils.chem_utils import _compute_MC2, _compute_fraction_sp3, _compute_fraction_carbon
 
 class ApproachA(Base3DDescriptor):
     """ This is the first approach for the 3D descriptor. 

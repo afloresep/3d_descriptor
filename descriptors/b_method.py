@@ -3,7 +3,7 @@
 from math import log
 from .base_descriptor import Base3DDescriptor
 from rdkit.Chem import Descriptors
-from ..utils.chem_utils import get_heavy_atom_count, compute_fraction_sp3
+from utils.chem_utils import _get_heavy_atom_count, _compute_fraction_sp3
 
 class ApproachB(Base3DDescriptor):
     """
@@ -14,13 +14,13 @@ class ApproachB(Base3DDescriptor):
     """
 
     def compute(self, mol):
-        hac = get_heavy_atom_count(mol)
+        hac = _get_heavy_atom_count(mol)
         if hac == 0:
             return (0.0, 0.0, 0.0)  # or handle edge cases differently
         
         x = log(hac)
         tpsa = Descriptors.TPSA(mol)
         y = tpsa / hac
-        z = compute_fraction_sp3(mol)
+        z = _compute_fraction_sp3(mol)
 
         return (x, y, z)
