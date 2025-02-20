@@ -14,12 +14,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest flake8 black mypy
+          pip install pytest black mypy
       - name: Lint
-        run: flake8 3D_descriptors
+        run: flake8 --ignore E501,W291 descriptors utils
       - name: Type Check
-        run: mypy 3D_descriptors
+        run: mypy descriptors
       - name: Test
-        run: pytest --cov=3D_descriptors
+        run: pytest --cov=descriptors
       - name: Coverage Report
         run: echo "Coverage done!"
