@@ -2,11 +2,10 @@ from rdkit import Chem
 
 
 def _compute_MC2(mol):
-    """Computes the MC2 descriptor value. 
-    MC2= HAC - DV - 2x(X-C=O),  
+    """Computes the MC2 descriptor value.
+    MC2= HAC - DV - 2x(X-C=O)
     Args:
         mol (Chem.Mol): RDKit molecule object.
-
     Returns:
         int: MC2 complexity score.
     Where
@@ -29,17 +28,15 @@ def _compute_MC2(mol):
     x_c_o = _count_carboxyl_like_groups(mol)
 
     # apply mc2 formula (Ye's paper)
-    mc2 = hac - dv - 2*(x_c_o)
+    mc2 = hac - dv - 2 * (x_c_o)
 
     return mc2
 
 
 def _get_heavy_atom_count(mol: Chem.Mol) -> int:
     """Computes the heavy atom count (HAC).
-    
     Args:
         mol (Chem.Mol): RDKit molecule object.
-    
     Returns:
         int: Number of heavy atoms in the molecule.
     """
@@ -48,10 +45,8 @@ def _get_heavy_atom_count(mol: Chem.Mol) -> int:
 
 def _compute_fraction_sp3(mol: Chem.Mol) -> float:
     """Computes the fraction of sp3-hybridized atoms.
-    
     Args:
         mol (Chem.Mol): RDKit molecule object.
-    
     Returns:
         float: Fraction of sp3-hybridized atoms among heavy atoms.
     """
@@ -63,10 +58,8 @@ def _compute_fraction_sp3(mol: Chem.Mol) -> float:
 
 def _compute_fraction_carbon(mol: Chem.Mol) -> float:
     """Computes the fraction of carbon atoms in the molecule.
-    
     Args:
         mol (Chem.Mol): RDKit molecule object.
-    
     Returns:
         float: Fraction of carbon atoms among heavy atoms.
     """
@@ -78,13 +71,10 @@ def _compute_fraction_carbon(mol: Chem.Mol) -> float:
 
 def _count_divalent_nodes(mol: Chem.Mol) -> int:
     """Counts the number of divalent nodes in the molecule.
-    
     Args:
         mol (Chem.Mol): RDKit molecule object.
-    
     Returns:
         int: Number of atoms with exactly two neighbors.
-
     In a more easy to read format: 
     divalent_nodes = 0
     for atom in mol.GetAtoms():
@@ -94,18 +84,18 @@ def _count_divalent_nodes(mol: Chem.Mol) -> int:
     """
     return sum(1 for atom in mol.GetAtoms() if atom.GetDegree() == 2) 
 
+
 def _count_carboxyl_like_groups(mol: Chem.Mol) -> int:
     """Counts the number of carboxyl-like groups in the molecule.
-    
-    A carboxyl-like group is defined as a carbonyl carbon attached to at least one nitrogen or oxygen atom.
-    
+    A carboxyl-like group is defined as a carbonyl carbon attached to
+      at least one nitrogen or oxygen atom.
     Args:
         mol (Chem.Mol): RDKit molecule object.
-    
     Returns:
         int: Number of carboxyl-like groups.
     """
-    # This should be somehow chagned to not be computed every time the function is called. 
+    # This should be somehow chagned to not be computed every time
+    # the function is called. 
     CARBONYL_PATTERN = Chem.MolFromSmarts("[CX3]=[OX1]")
 
     matches_c_o = mol.GetSubstructMatches(CARBONYL_PATTERN)
@@ -124,5 +114,5 @@ def _count_carboxyl_like_groups(mol: Chem.Mol) -> int:
         if any(nbr.GetAtomicNum() in [7, 8] for nbr in valid_neighbors):
             count_with_N_or_O += 1
             counted_carbons.add(carbon_idx)
-    
+
     return count_with_N_or_O
