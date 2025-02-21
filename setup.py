@@ -11,6 +11,8 @@ setup(
         "numpy",
         "pandas",
         "matplotlib",
+        "tqdm", 
+        "pyarrow",
     ],
     extras_require={
         "dev": [
