@@ -29,7 +29,7 @@ class ApproachA(Base3DDescriptor):
                 - z: Fraction of carbon atoms (float)
         """
         x = _compute_MC2(mol)          # returns float
-        y = _compute_fraction_sp3(mol)  # returns float
-        z = _compute_fraction_carbon(mol)  # returns float
+        y = 10*_compute_fraction_sp3(mol)  # returns float
+        z = 10*_compute_fraction_carbon(mol)  # returns float
 
         return (x, y, z)
